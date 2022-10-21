@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace Cars.Data.Models
 {
-    public class Car
+    public class Owner
     {
         public int Id { get; set; }
-        [Required]
-        [MaxLength(20)]
-        public string VinNumber { get; set; }
+
         [Required]
         [MaxLength(100)]
-        public string RegistrationPlate { get; set; }
+        public string Name { get; set; }
 
-        public Owner Owner { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Surname { get; set; }
+        public List<Car> Cars { get; set; }
     }
 }
