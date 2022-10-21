@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Cars\" />
+    <Folder Include="Pages\Owners\" />
   </ItemGroup>
 
 </Project>
