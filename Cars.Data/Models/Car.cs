@@ -17,6 +17,6 @@ namespace Cars.Data.Models
         [MaxLength(100)]
         public string RegistrationPlate { get; set; }
 
-        public Owner Owner { get; set; }
+        public Owner? Owner { get; set; }
     }
 }
