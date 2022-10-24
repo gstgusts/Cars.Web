@@ -18,6 +18,6 @@ namespace Cars.Data.Models
         [Required]
         [MaxLength(100)]
         public string Surname { get; set; }
-        public List<Car> Cars { get; set; }
+        public List<Car> Cars { get; set; } = new List<Car>();
     }
 }

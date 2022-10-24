@@ -20,9 +20,4 @@
     <ProjectReference Include="..\Cars.Data\Cars.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Cars\" />
-    <Folder Include="Pages\Owners\" />
-  </ItemGroup>
-
 </Project>
