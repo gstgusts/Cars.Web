@@ -18,5 +18,7 @@ namespace Cars.Data.Models
         public string RegistrationPlate { get; set; }
 
         public Owner? Owner { get; set; }
+
+        public CarTypeEnum? Type { get; set; }
     }
 }

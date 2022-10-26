@@ -25,6 +25,13 @@
                 <span asp-validation-for="Car.RegistrationPlate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Car.Owner" class="control-label"></label>
+                <select class="js-example-basic-single" id="carOwner" name="Car.Owner">
+                    <option value="AL">Alabama</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -38,3 +45,9 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+    <script>
+        $(document).ready(function() {
+            $('#carOwner').select2();
+        });
+    </script>
