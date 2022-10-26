@@ -25,8 +25,17 @@
                 <span asp-validation-for="Car.RegistrationPlate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Car.Type" class="control-label"></label>
+                <select asp-for="Car.Type" class="js-example-basic-single form-control" id="carType">
+                    <option value="">-</option>
+                    <option value="Micro">Micro</option>
+                    <option value="Sedan" >Sedan</option>
+                    <option value="Wagon">Wagon</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Car.Owner" class="control-label"></label>
-                <select class="js-example-basic-single" id="carOwner" name="Car.Owner">
+                <select class="js-example-basic-single form-control" id="carOwner" name="Car.Owner">
                     <option value="AL">Alabama</option>
                     <option value="WY">Wyoming</option>
                 </select>
@@ -49,5 +58,6 @@
     <script>
         $(document).ready(function() {
             $('#carOwner').select2();
+            $('#carType').select2();
         });
     </script>
