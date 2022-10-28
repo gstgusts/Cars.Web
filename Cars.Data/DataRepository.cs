@@ -11,16 +11,17 @@ namespace Cars.Data
 {
     public class DataRepository : IDataRepository
     {
+        private readonly ApplicationDbContext _context;
+
+        public DataRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<Owner> GetOwners(string query)
         {
-            var options = new DbContextOptions<ApplicationDbContext>();
-
-
-            using (var context = new ApplicationDbContext(options))
-            {
-                return context.Owners.Where(o => o.Name.Contains(query, StringComparison.InvariantCultureIgnoreCase)
-                || o.Surname.Contains(query, StringComparison.InvariantCultureIgnoreCase)).ToArray();
-            }
+            return _context.Owners.Where(o => o.Name.ToLower().Contains(query.ToLower())
+            || o.Surname.ToLower().Contains(query.ToLower())).ToArray();
         }
     }
 }

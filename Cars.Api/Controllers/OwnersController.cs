@@ -1,5 +1,6 @@
 using Cars.Api.Models;
 using Cars.Data;
+using Cars.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -11,11 +12,13 @@ namespace Cars.Api.Controllers
     {
         private readonly ILogger<OwnersController> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly IDataRepository _repo;
 
         public OwnersController(ILogger<OwnersController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
+            _repo = new DataRepository(context);
         }
 
         [HttpGet]
@@ -26,9 +29,7 @@ namespace Cars.Api.Controllers
                 return new List<OwnerDto>();
             }
 
-            return _context.Owners.Where(o => o.Name.ToLower().Contains(query.ToLower())
-            || o.Surname.ToLower().Contains(query.ToLower())).ToArray()
-            .Select(o => new OwnerDto()
+            return _repo.GetOwners(query).Select(o => new OwnerDto()
             {
                 Id = o.Id,
                 Name = o.Name,
