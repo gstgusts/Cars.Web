@@ -12,9 +12,10 @@ namespace Cars.Api.Controllers
         private readonly ILogger<OwnersController> _logger;
         private readonly ApplicationDbContext _context;
 
-        public OwnersController(ILogger<OwnersController> logger)
+        public OwnersController(ILogger<OwnersController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
@@ -25,8 +26,8 @@ namespace Cars.Api.Controllers
                 return new List<OwnerDto>();
             }
 
-            return _context.Owners.Where(o => o.Name.Contains(query, StringComparison.InvariantCultureIgnoreCase)
-            || o.Surname.Contains(query, StringComparison.InvariantCultureIgnoreCase)).ToArray()
+            return _context.Owners.Where(o => o.Name.ToLower().Contains(query.ToLower())
+            || o.Surname.ToLower().Contains(query.ToLower())).ToArray()
             .Select(o => new OwnerDto()
             {
                 Id = o.Id,
