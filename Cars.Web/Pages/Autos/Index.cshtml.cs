@@ -25,7 +25,7 @@ namespace Cars.Web.Pages.Autos
         {
             if (_context.Cars != null)
             {
-                Car = await _context.Cars.ToListAsync();
+                Car = await _context.Cars.Include(c=>c.Owner).ToListAsync();
             }
         }
     }

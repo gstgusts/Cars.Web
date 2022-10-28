@@ -23,6 +23,8 @@ namespace Cars.Web.Pages.Autos
         [BindProperty]
         public Car Car { get; set; } = default!;
 
+        public IEnumerable<SelectListItem> AllOwners { get; set; } = new List<SelectListItem>();
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Cars == null)
@@ -36,6 +38,16 @@ namespace Cars.Web.Pages.Autos
                 return NotFound();
             }
             Car = car;
+
+            var allOwners = new List<SelectListItem>
+            {
+                new SelectListItem("-","")
+            };
+
+            allOwners.AddRange(_context.Owners.Select(o => new SelectListItem(o.Surname+" "+o.Name, o.Id.ToString())));
+
+            AllOwners = allOwners;
+
             return Page();
         }
 
