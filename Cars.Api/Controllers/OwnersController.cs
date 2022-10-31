@@ -23,19 +23,22 @@ namespace Cars.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<OwnerDto> Get(string? query)
+        public OwnerSearchResult Get(string? search)
         {
-            if(string.IsNullOrEmpty(query))
+            if(string.IsNullOrEmpty(search))
             {
-                return new List<OwnerDto>();
+                return new OwnerSearchResult();
             }
 
-            return _repo.GetOwners(query).Select(o => new OwnerDto()
+            var result = new OwnerSearchResult();
+
+            result.Results = _repo.GetOwners(search).Select(o => new OwnerSearchDto()
             {
                 Id = o.Id,
-                Name = o.Name,
-                Surname = o.Surname
-            });
+                Text = o.Surname + " " + o.Name
+            }).ToList();
+
+            return result;
         }
 
         [HttpPost]

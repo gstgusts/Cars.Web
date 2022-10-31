@@ -16,6 +16,8 @@ namespace Cars.Api
 
             builder.Services.AddControllers();
 
+            builder.Services.AddCors();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,6 +28,11 @@ namespace Cars.Api
 
 
             app.MapControllers();
+
+            app.UseCors(bd => bd
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.Run();
         }
