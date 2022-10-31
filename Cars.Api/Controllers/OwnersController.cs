@@ -1,6 +1,7 @@
 using Cars.Api.Models;
 using Cars.Data;
 using Cars.Data.Interfaces;
+using Cars.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -35,6 +36,20 @@ namespace Cars.Api.Controllers
                 Name = o.Name,
                 Surname = o.Surname
             });
+        }
+
+        [HttpPost]
+        public Owner Create(OwnerDto model)
+        {
+
+            var result = _repo.Create(new Owner()
+            {
+                Id = 0,
+                Name = model.Name,
+                Surname = model.Surname
+            });
+
+            return result;
         }
     }
 }

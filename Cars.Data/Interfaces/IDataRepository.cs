@@ -10,5 +10,7 @@ namespace Cars.Data.Interfaces
     public interface IDataRepository
     {
         IEnumerable<Owner> GetOwners(string query);
+
+        Owner Create(Owner data);
     }
 }

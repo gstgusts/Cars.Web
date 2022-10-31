@@ -18,6 +18,14 @@ namespace Cars.Data
             _context = context;
         }
 
+        public Owner Create(Owner data)
+        {
+            _context.Add(data);
+            _context.SaveChanges();
+
+            return data;
+        }
+
         public IEnumerable<Owner> GetOwners(string query)
         {
             return _context.Owners.Where(o => o.Name.ToLower().Contains(query.ToLower())
