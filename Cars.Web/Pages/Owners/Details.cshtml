@@ -26,6 +26,54 @@
     </dl>
 </div>
 <div>
+    <h6>Cars</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner.Cars[0].VinNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner.Cars[0].RegistrationPlate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner.Cars[0].Type)
+                </th>
+                <th>
+                    Owner
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Owner.Cars)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VinNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @if (item.Owner != null)
+                        {
+                            @Html.Raw(item.Owner.Surname+"&nbsp;"+item.Owner.Name)
+                        }
+                        else
+                        {
+                            @Html.Raw("&nbsp;")
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
     <a asp-page="./Edit" asp-route-id="@Model.Owner?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
