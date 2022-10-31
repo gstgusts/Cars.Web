@@ -4,7 +4,84 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="SearchModel.VinNumber" class="control-label"></label>
+                    <input asp-for="SearchModel.VinNumber" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SearchModel.RegistrationPlate" class="control-label"></label>
+                    <input asp-for="SearchModel.RegistrationPlate" class="form-control" />
+                </div>
+
+@*                <div class="form-group">
+                    <label asp-for="Car.Type" class="control-label"></label>
+                    <select asp-for="Car.Type" class="js-example-basic-single form-control" id="carType">
+                        <option value="">-</option>
+                        <option value="Micro">Micro</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Wagon">Wagon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car.Owner" class="control-label"></label>
+                    <select asp-for="Car.OwnerId" class="js-example-basic-single form-control" id="carOwner">
+                    </select>
+                </div>*@
+
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].VinNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].RegistrationPlate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Type)
+                </th>
+                <th>
+                    Owner
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cars)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VinNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @if (item.Owner != null)
+                        {
+                            @Html.Raw(item.Owner.Surname+"&nbsp;"+item.Owner.Name)
+                        }
+                        else
+                        {
+                            @Html.Raw("&nbsp;")
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
