@@ -15,5 +15,9 @@ namespace Cars.Data.Models
         public Car Car { get; set; }
 
         public Owner Owner { get; set; }
+
+        public int CarId { get; set; }
+
+        public int OwnerId { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Cars.Web.Pages.Autos
                 return NotFound();
             }
 
-            var car =  await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
+            var car =  await _context.Cars.Include(o => o.Owner).FirstOrDefaultAsync(m => m.Id == id);
             if (car == null)
             {
                 return NotFound();
@@ -60,7 +60,41 @@ namespace Cars.Web.Pages.Autos
                 return Page();
             }
 
-            _context.Attach(Car).State = EntityState.Modified;
+            var carOldData = _context.Cars.FirstOrDefault(c => c.Id == Car.Id);
+
+            if(carOldData.OwnerId.HasValue && Car.OwnerId.HasValue && carOldData.OwnerId != Car.OwnerId)
+            {
+                var date = DateTime.Now;
+
+                var prevHistoryData = _context.CarsHistory.FirstOrDefault(c => c.Car.Id == Car.Id && c.Owner.Id == carOldData.OwnerId);
+                prevHistoryData.DateTo = date;
+
+                _context.SaveChanges();
+
+                var owner = _context.Owners.FirstOrDefault(o => o.Id == Car.OwnerId);
+
+                var newHistoryData = new CarHistory
+                {
+                    Id = 0,
+                    DateFrom = date,
+                    CarId = Car.Id,
+                    OwnerId = owner.Id
+                };
+
+                _context.CarsHistory.Add(newHistoryData);
+
+                _context.SaveChanges();
+            }
+
+
+            //var car = _context.Cars.FirstOrDefault(c => c.Id == Car.Id);
+
+            carOldData.RegistrationPlate = Car.RegistrationPlate;
+            carOldData.VinNumber = Car.VinNumber;
+            carOldData.Type = Car.Type;
+            carOldData.OwnerId = Car.OwnerId;
+
+            //_context.Attach(Car).State = EntityState.Modified;
 
             try
             {

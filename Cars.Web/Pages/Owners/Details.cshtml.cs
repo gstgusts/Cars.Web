@@ -21,6 +21,8 @@ namespace Cars.Web.Pages.Owners
 
       public Owner Owner { get; set; }
 
+      public List<CarHistory> CarHistory { get; set; } = new List<CarHistory>();
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Owners == null)
@@ -30,8 +32,8 @@ namespace Cars.Web.Pages.Owners
 
             var owner = await _context.Owners
                 .Include(c => c.Cars)
-                .Include(c => c.History)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (owner == null)
             {
                 return NotFound();
@@ -39,6 +41,10 @@ namespace Cars.Web.Pages.Owners
             else 
             {
                 Owner = owner;
+                CarHistory = _context.CarsHistory
+                    .Include(c => c.Owner)
+                    .Include(c => c.Car)
+                    .Where(c => c.OwnerId == owner.Id).ToList();
             }
             return Page();
         }

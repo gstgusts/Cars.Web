@@ -37,6 +37,22 @@ namespace Cars.Web.Pages.Autos
             }
 
             _context.Cars.Add(Car);
+
+            if(Car.OwnerId.HasValue)
+            {
+                var owner = _context.Owners.FirstOrDefault(o => o.Id == Car.OwnerId);
+
+                var history = new CarHistory
+                {
+                    Id = 0,
+                    Car = Car,
+                    DateFrom = DateTime.Now,
+                    Owner = owner
+                };
+
+                _context.CarsHistory.Add(history);
+            }
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
