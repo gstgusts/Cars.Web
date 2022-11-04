@@ -4,6 +4,7 @@ using Cars.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cars.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221104171842_CarHistoryAdded")]
+    partial class CarHistoryAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,13 +327,13 @@ namespace Cars.Data.Migrations
             modelBuilder.Entity("Cars.Data.Models.CarHistory", b =>
                 {
                     b.HasOne("Cars.Data.Models.Car", "Car")
-                        .WithMany("History")
+                        .WithMany()
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Cars.Data.Models.Owner", "Owner")
-                        .WithMany("History")
+                        .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -392,16 +394,9 @@ namespace Cars.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Cars.Data.Models.Car", b =>
-                {
-                    b.Navigation("History");
-                });
-
             modelBuilder.Entity("Cars.Data.Models.Owner", b =>
                 {
                     b.Navigation("Cars");
-
-                    b.Navigation("History");
                 });
 #pragma warning restore 612, 618
         }

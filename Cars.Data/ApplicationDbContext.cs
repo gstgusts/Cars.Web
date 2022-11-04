@@ -19,5 +19,7 @@ namespace Cars.Data
         public DbSet<Car> Cars { get; set; }
 
         public DbSet<Owner> Owners { get; set; }
+
+        public DbSet<CarHistory> CarsHistory { get; set; }
     }
 }

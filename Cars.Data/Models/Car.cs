@@ -30,5 +30,7 @@ namespace Cars.Data.Models
 
         [DisplayName("Engine Type")]
         public CarEngineTypeEnum? EngineType { get; set; }
+
+        public List<CarHistory> History { get; set; } = new List<CarHistory>();
     }
 }

@@ -28,7 +28,10 @@ namespace Cars.Web.Pages.Owners
                 return NotFound();
             }
 
-            var owner = await _context.Owners.Include(c => c.Cars).FirstOrDefaultAsync(m => m.Id == id);
+            var owner = await _context.Owners
+                .Include(c => c.Cars)
+                .Include(c => c.History)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
                 return NotFound();

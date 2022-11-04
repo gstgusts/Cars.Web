@@ -72,6 +72,52 @@
         </tbody>
     </table>
 </div>
+<div>
+    <h6>Car history</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                   VIN
+                </th>
+                <th>
+                    Registration plate
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Date from
+                </th>
+                <th>
+                    Date to
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Owner.History)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.VinNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.RegistrationPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTo)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Owner?.Id">Edit</a> |
