@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Cars.Data.Models;
+using System.ComponentModel;
 
 namespace Cars.Web.Models
 {
@@ -9,5 +10,11 @@ namespace Cars.Web.Models
 
         [DisplayName("Registration plate number")]
         public string RegistrationPlate { get; set; }
+
+        public CarTypeEnum? Type { get; set; }
+
+        public Owner? Owner { get; set; }
+
+        public int? OwnerId { get; set; }
     }
 }

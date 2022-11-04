@@ -21,6 +21,8 @@ namespace Cars.Web.Pages.Autos
 
       public Car Car { get; set; }
 
+        public IEnumerable<CarHistory> CarHistory { get; set; } = new List<CarHistory>();
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Cars == null)
@@ -36,6 +38,10 @@ namespace Cars.Web.Pages.Autos
             else 
             {
                 Car = car;
+                CarHistory = _context.CarsHistory
+                    .Include(m => m.Car)
+                    .Include(o => o.Owner)
+                    .Where(c => c.CarId == car.Id);
             }
             return Page();
         }

@@ -23,7 +23,59 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Car.RegistrationPlate)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.Year)
+        </dd>
     </dl>
+</div>
+<div>
+    <h6>Car history</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Date from
+                </th>
+                <th>
+                    Date to
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CarHistory)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTo)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Car?.Id">Edit</a> |

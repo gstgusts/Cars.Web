@@ -17,20 +17,21 @@
                     <input asp-for="SearchModel.RegistrationPlate" class="form-control" />
                 </div>
 
-@*                <div class="form-group">
-                    <label asp-for="Car.Type" class="control-label"></label>
-                    <select asp-for="Car.Type" class="js-example-basic-single form-control" id="carType">
+               <div class="form-group">
+                <label asp-for="SearchModel.Type" class="control-label"></label>
+                <select asp-for="SearchModel.Type" class="js-example-basic-single form-control" id="carType">
                         <option value="">-</option>
                         <option value="Micro">Micro</option>
                         <option value="Sedan">Sedan</option>
                         <option value="Wagon">Wagon</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Car.Owner" class="control-label"></label>
-                    <select asp-for="Car.OwnerId" class="js-example-basic-single form-control" id="carOwner">
+
+               <div class="form-group">
+                <label asp-for="SearchModel.Owner" class="control-label"></label>
+                <select asp-for="SearchModel.OwnerId" class="js-example-basic-single form-control" id="carOwner">
                     </select>
-                </div>*@
+                </div>
 
                 <div class="form-group">
                     <input type="submit" value="Search" class="btn btn-primary" />
@@ -85,3 +86,23 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#carOwner').select2({
+            ajax: {
+                url: 'https://localhost:7042/owners',
+                data: function (params) {
+                    var query = {
+                        search: params.term
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    // ?search=[val]
+                    return query;
+                }
+            }
+        });
+        $('#carType').select2();
+    });
+</script>

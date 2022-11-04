@@ -30,7 +30,24 @@ namespace Cars.Web.Pages
 
         public void OnPost()
         {
-            var result = _context.Cars.Where(c => c.VinNumber.ToLower().Contains(SearchModel.VinNumber.ToLower()));
+            IQueryable<Car> result = _context.Cars;
+
+            
+            if(! string.IsNullOrEmpty(SearchModel.VinNumber))
+            {
+                result = result.Where(c => c.VinNumber.ToLower().Contains(SearchModel.VinNumber.ToLower()));
+            }
+
+            if(SearchModel.OwnerId.HasValue)
+            {
+                result = result.Where(o=>o.OwnerId == SearchModel.OwnerId.Value);
+            }
+
+            if(SearchModel.Type.HasValue)
+            {
+                result = result.Where(o => o.Type == SearchModel.Type.Value);
+            }
+
             Cars = result.ToList(); 
         }
     }
