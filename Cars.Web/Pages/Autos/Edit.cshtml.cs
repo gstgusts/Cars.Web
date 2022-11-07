@@ -100,6 +100,7 @@ namespace Cars.Web.Pages.Autos
             carOldData.Type = Car.Type;
             carOldData.OwnerId = Car.OwnerId;
             carOldData.EngineType = Car.EngineType;
+            carOldData.Year = Car.Year;
 
             //_context.Attach(Car).State = EntityState.Modified;
 

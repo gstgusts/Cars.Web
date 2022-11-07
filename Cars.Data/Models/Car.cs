@@ -26,6 +26,7 @@ namespace Cars.Data.Models
 
         public CarTypeEnum? Type { get; set; }
 
+        [Range(2000,2050)]
         public int? Year { get; set; }
 
         [DisplayName("Engine Type")]
