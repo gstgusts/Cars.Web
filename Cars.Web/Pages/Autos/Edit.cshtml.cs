@@ -23,6 +23,12 @@ namespace Cars.Web.Pages.Autos
         [BindProperty]
         public Car Car { get; set; } = default!;
 
+        public string[] CarEngineTypes = { 
+            CarEngineTypeEnum.Petrol.ToString(),
+            CarEngineTypeEnum.Diesel.ToString(),
+            CarEngineTypeEnum.Electric.ToString()
+        };
+
         public IEnumerable<SelectListItem> AllOwners { get; set; } = new List<SelectListItem>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
