@@ -41,9 +41,8 @@
 
             @foreach(var engineType in Model.CarEngineTypes) {
                 <div class="form-check">
-                    @Html.RadioButtonFor(m => m.Car.EngineType, engineType)
-@*                    <input class="form-check-input" type="radio" id="carElectricType" name="Car.EngineType" value="Electric" />*@
-                    <label class="form-check-label" for="carElectricType">@engineType</label>
+                    @Html.RadioButtonFor(m => m.Car.EngineType, engineType, new { @class="form-check-input", @id=$"lbl_{engineType}" })
+                    <label class="form-check-label" for="lbl_@(engineType)">@engineType</label>
                 </div>
             }
 
