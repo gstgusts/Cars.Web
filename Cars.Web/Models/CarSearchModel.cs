@@ -16,5 +16,7 @@ namespace Cars.Web.Models
         public Owner? Owner { get; set; }
 
         public int? OwnerId { get; set; }
+
+        public CarEngineTypeEnum? EngineType { get; set; }
     }
 }

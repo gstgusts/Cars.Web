@@ -21,6 +21,12 @@ namespace Cars.Web.Pages
         [BindProperty]
         public CarSearchModel SearchModel { get; set; }
 
+        public string[] CarEngineTypes = {
+            CarEngineTypeEnum.Petrol.ToString(),
+            CarEngineTypeEnum.Diesel.ToString(),
+            CarEngineTypeEnum.Electric.ToString()
+        };
+
         public List<Car> Cars { get; set; } = new List<Car>();
 
         public void OnGet()
@@ -46,6 +52,11 @@ namespace Cars.Web.Pages
             if(SearchModel.Type.HasValue)
             {
                 result = result.Where(o => o.Type == SearchModel.Type.Value);
+            }
+
+            if(SearchModel.EngineType.HasValue)
+            {
+                result = result.Where(o => o.EngineType == SearchModel.EngineType);
             }
 
             Cars = result.ToList(); 

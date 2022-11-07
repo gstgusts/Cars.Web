@@ -33,6 +33,14 @@
                     </select>
                 </div>
 
+                @foreach (var engineType in Model.CarEngineTypes)
+                {
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.SearchModel.EngineType, engineType, new { @class="form-check-input", @id=$"lbl_{engineType}" })
+                        <label class="form-check-label" for="lbl_@(engineType)">@engineType</label>
+                    </div>
+                }
+
                 <div class="form-group">
                     <input type="submit" value="Search" class="btn btn-primary" />
                 </div>
